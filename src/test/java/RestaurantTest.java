@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 class RestaurantTest {
 	Restaurant restaurant;
+	List<String> selectedItems = new ArrayList<String>();
 
 	// REFACTOR ALL THE REPEATED LINES OF CODE
 	public void addRestaurant() {
@@ -71,16 +72,46 @@ class RestaurantTest {
 	// <<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 	// <<<<<<<<<<<<<<<<<<<<<<<<<<<Order Total>>>>>>>>>>>>>>>>>>>>>>
-	// failing testcase
 
 	@Test
 	public void order_Sweet_Corn_Soup_verify_Total() {
 		addRestaurant();
-		List<String> selectedItems = new ArrayList<String>();
 		selectedItems.add("Sweet corn soup");
-		int price = 0;
-		// we need to implement a method to get the order total of the selected items
+		int price = restaurant.getOrderTotal(selectedItems);
 		assertEquals(price, 119);
+	}
+
+	@Test
+	public void order_Vegetable_lasagne_verify_Total() {
+		addRestaurant();
+		selectedItems.add("Vegetable lasagne");
+		int price = restaurant.getOrderTotal(selectedItems);
+		assertEquals(price, 269);
+	}
+
+	@Test
+	public void order_all_items_verify_Total() {
+		addRestaurant();
+		selectedItems.add("Sweet corn soup");
+		selectedItems.add("Vegetable lasagne");
+		int price = restaurant.getOrderTotal(selectedItems);
+		assertEquals(price, 388);
+	}
+
+	@Test
+	public void remove_One_item_verify_Total() throws itemNotFoundException {
+		addRestaurant();
+		restaurant.addToMenu("Sizzling brownie", 319);
+		selectedItems.add("Sweet corn soup");
+		selectedItems.add("Vegetable lasagne");
+		selectedItems.add("Sizzling brownie");
+		int beforeRemovingPrice = restaurant.getOrderTotal(selectedItems);
+		assertEquals(beforeRemovingPrice, 707);
+		restaurant.removeFromMenu("Sizzling brownie");
+		selectedItems.remove("Sizzling brownie");
+		int afterRemovingPrice = restaurant.getOrderTotal(selectedItems);
+		assertEquals(afterRemovingPrice, 388);
+
 	}
 
 }
