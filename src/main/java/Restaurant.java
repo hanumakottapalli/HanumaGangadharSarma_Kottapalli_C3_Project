@@ -65,4 +65,15 @@ public class Restaurant {
 		return name;
 	}
 
+	public int getOrderTotal(List<String> selectedItem) {
+
+		int total = 0;
+		if (selectedItem.size() >= 1) {
+			for (int i = 0; i < selectedItem.size(); i++) {
+				total = total + findItemByName(selectedItem.get(i)).getPrice();
+			}
+		}
+		return total;
+
+	}
 }

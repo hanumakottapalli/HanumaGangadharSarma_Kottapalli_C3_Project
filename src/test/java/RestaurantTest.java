@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -65,6 +67,20 @@ class RestaurantTest {
 		addRestaurant();
 		assertThrows(itemNotFoundException.class, () -> restaurant.removeFromMenu("French fries"));
 	}
+
 	// <<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+	// <<<<<<<<<<<<<<<<<<<<<<<<<<<Order Total>>>>>>>>>>>>>>>>>>>>>>
+	// failing testcase
+
+	@Test
+	public void order_Sweet_Corn_Soup_verify_Total() {
+		addRestaurant();
+		List<String> selectedItems = new ArrayList<String>();
+		selectedItems.add("Sweet corn soup");
+		int price = 0;
+		// we need to implement a method to get the order total of the selected items
+		assertEquals(price, 119);
+	}
 
 }
